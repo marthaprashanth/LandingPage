@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        background: linear-gradient(136deg, rgba(255, 255, 255, 1) 0%, rgba(244, 244, 246, 1) 100%);
+        @apply text-grey-900;
+        font-family: 'Poppins', sans-serif;
+    }
+}
+
+@layer components {
+    .card {
+        @apply bg-shade-white rounded-3xl p-8 shadow-card backdrop-blur-sm;
+    }
+
+    .glass-effect {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-primary {
+        @apply px-6 py-3 rounded-2xl font-semibold text-sm transition-all duration-200;
+        @apply bg-gradient-accent text-shade-white shadow-accent-small;
+        @apply hover:shadow-accent hover:scale-105;
+    }
+
+    .btn-secondary {
+        @apply px-6 py-3 rounded-2xl font-semibold text-sm transition-all duration-200;
+        @apply bg-shade-white text-grey-900 border border-grey-300;
+        @apply hover:bg-grey-100;
+    }
+}
