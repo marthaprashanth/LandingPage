@@ -83,58 +83,62 @@ const LatestActions = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-gray-100 p-6 rounded-lg">
+    <div className="w-full max-w-6xl mx-auto bg-gray-100 p-4 sm:p-6 md:p-8 rounded-xl">
       {/* Header */}
-      <div className="mb-6">
-        <h2 className="text-lg font-semibold text-gray-900">Latest Actions</h2>
+      <div className="mb-6 text-center md:text-left">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900">
+          Latest Actions
+        </h2>
       </div>
 
-      <div className="flex gap-6">
+      {/* Main Layout */}
+      <div className="flex flex-col lg:flex-row gap-6">
         {/* Sidebar */}
-        <div className="w-56 flex-shrink-0">
-          <div className="space-y-4">
-            <div className="text-sm font-medium text-gray-600 mb-3">
+        <div className="w-full lg:w-60 xl:w-72 flex-shrink-0">
+          <div className="space-y-4 bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+            <div className="text-sm font-medium text-gray-600 mb-2 text-center lg:text-left">
               Show Actions :
             </div>
 
             {/* Payments Filter */}
             <button
-              className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 bg-black text-white  hover:text-white hover:bg-[linear-gradient(90deg,#EC4899_0%,#6366F1_100%)]`}
+              className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 bg-black text-white hover:text-white hover:bg-[linear-gradient(90deg,#EC4899_0%,#6366F1_100%)]`}
             >
               <div className="flex items-center gap-2">
                 <CreditCard className="w-4 h-4" />
                 <span>Payments</span>
               </div>
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-4 h-4 hidden sm:block" />
             </button>
 
             {/* Status Filters */}
-            <div className="pt-4 space-y-3">
+            <div className="pt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-3">
               {(Object.keys(selectedStatuses) as StatusType[]).map((status) => (
-                <div key={status} className="flex items-center justify-between">
+                <div
+                  key={status}
+                  className="flex items-center justify-between gap-2"
+                >
                   <label
                     htmlFor={status}
-                    className="text-sm text-gray-600 cursor-pointer"
+                    className="text-sm text-gray-600 cursor-pointer truncate"
                   >
                     {status.charAt(0).toUpperCase() + status.slice(1)}
                   </label>
-                  <div className="relative">
-                    <input
-                      type="checkbox"
-                      id={status}
-                      checked={selectedStatuses[status]}
-                      onChange={() => toggleStatus(status)}
-                      className="w-4 h-4 rounded border-2 appearance-none cursor-pointer checked:bg-black"
-                      style={{
-                        borderImage: selectedStatuses[status]
-                          ? "linear-gradient(135deg, #ec4899, #3b82f6) 1"
-                          : "none",
-                        borderColor: selectedStatuses[status]
-                          ? "transparent"
-                          : "#d1d5db",
-                      }}
-                    />
-                  </div>
+                  <input
+                    type="checkbox"
+                    id={status}
+                    checked={selectedStatuses[status]}
+                    onChange={() => toggleStatus(status)}
+                    className="w-4 h-4 rounded border-2 appearance-none cursor-pointer checked:bg-black"
+                    style={{
+                      borderImage: selectedStatuses[status]
+                        ? "linear-gradient(135deg, #ec4899, #3b82f6) 1"
+                        : "none",
+                      borderColor: selectedStatuses[status]
+                        ? "transparent"
+                        : "#d1d5db",
+                    }}
+                  />
                 </div>
               ))}
             </div>
@@ -145,7 +149,7 @@ const LatestActions = () => {
             {/* Go to All Payments Section */}
             <div className="text-start space-y-3">
               <a
-                href="#"
+                href="/payments"
                 className="text-sm font-medium text-gray-800 underline hover:bg-gradient-to-r hover:from-[#fcbbfc]/[0.92] hover:to-[#ada6ff] hover:bg-clip-text hover:text-transparent"
               >
                 Go to All Payments
@@ -155,11 +159,11 @@ const LatestActions = () => {
                 <button className="w-full flex items-center justify-start gap-3 bg-white text-gray-600 border border-gray-200 rounded-md px-4 py-2.5 shadow-sm hover:bg-gray-100 transition">
                   <Upload className="w-4 h-4 text-gray-400" />
                   <span className="text-sm font-medium text-gray-400">
-                    Invoices Send
+                    Invoices Sent
                   </span>
                 </button>
 
-                <button className="w-full flex items-center justify-start gap-3 bg-white text-gray-600 border  border-gray-200 rounded-md px-4 py-2.5 shadow-sm hover:bg-gray-100 transition">
+                <button className="w-full flex items-center justify-start gap-3 bg-white text-gray-600 border border-gray-200 rounded-md px-4 py-2.5 shadow-sm hover:bg-gray-100 transition">
                   <Download className="w-4 h-4 text-gray-400" />
                   <span className="text-sm font-medium text-gray-400">
                     Invoices Received
@@ -171,26 +175,29 @@ const LatestActions = () => {
         </div>
 
         {/* Transactions */}
-        <div className="flex-1 space-y-3">
+        <div className="flex-1 space-y-4">
           {transactions.map((transaction) => {
             const statusConfig = getStatusConfig(transaction.status);
             return (
               <div
                 key={transaction.id}
-                className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
+                className="bg-white rounded-lg p-4 sm:p-5 shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
               >
-                <div className="flex items-start justify-between mb-3">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 gap-2">
                   <div className="flex-1">
-                    <div className="flex items-center justify-between gap-2 text-xs text-gray-500 mb-1">
+                    <div className="flex flex-wrap justify-between text-xs text-gray-500 mb-1">
                       <span>{transaction.type}</span>
                       <span>{transaction.date}</span>
-                      <span>{transaction.transactionId}</span>
+                      <span className="hidden sm:inline">
+                        {transaction.transactionId}
+                      </span>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-2">
+
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                      <h3 className="text-sm font-semibold text-gray-900">
                         {transaction.recipient}
                       </h3>
-                      <div className="text-lg font-semibold text-gray-900">
+                      <div className="text-base sm:text-lg font-semibold text-gray-900">
                         ₹{" "}
                         {transaction.amount.toLocaleString("en-IN", {
                           minimumFractionDigits: 2,
@@ -199,14 +206,14 @@ const LatestActions = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 text-xs text-gray-600">
+                    <div className="flex items-center gap-2 text-xs text-gray-600 mt-1">
                       <CreditCard className="w-3 h-3" />
                       <span>{transaction.bank}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pt-3 border-t border-gray-100">
                   <div
                     className={`flex items-center gap-2 text-xs font-medium ${statusConfig.color}`}
                   >

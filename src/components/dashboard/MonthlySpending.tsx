@@ -45,7 +45,7 @@ const MonthlySpending = () => {
   const expensePath = generatePath(expenseValues);
 
   return (
-    <div className="bg-gray-50 rounded-3xl py-6 max-w-md">
+    <div className="bg-gray-50 rounded-3xl py-6 lg:max-w-md">
       {/* Header */}
       <h3 className="text-xl font-semibold text-gray-800 mb-4">
         Total Monthly Spending
