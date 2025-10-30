@@ -107,16 +107,17 @@ const Stats = () => {
           <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-grey-900 text-white text-[10px]">
             📅
           </span>
+          {""}
           Calendar
         </button>
       </div>
 
       {/* Calendar Days */}
-      <div className="flex gap-3 mb-3 overflow-x-auto pb-2">
-        {days.map((day, index) => {
+      <div className="flex gap-3 mb-3 overflow-x-auto pb-2 justify-between lg:justify-start">
+        {days.map((day) => {
           const isActive = selected.dateObj.getTime() === day.dateObj.getTime();
           return (
-            <div key={index} className="relative">
+            <div key={day.dateObj.getTime()} className="relative">
               {/* Gradient border wrapper when active */}
               <div
                 className={`${isActive ? "p-[2px] rounded-2xl" : "p-0"}`}

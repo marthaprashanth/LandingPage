@@ -9,31 +9,35 @@ import Footer from "./components/layout/Footer";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-grey-50 to-purple-50/20">
+    <div className="min-h-screen w-full bg-gradient-to-br from-white via-grey-50 to-purple-50/20 overflow-x-hidden">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="flex flex-col min-h-screen"
+        className="flex flex-col min-h-screen w-full"
       >
         {/* Main Layout */}
-        <div className="flex flex-1 gap-4 p-4">
+        <div className="flex flex-1 flex-col lg:flex-row gap-4 p-4 w-full max-w-[1600px] mx-auto">
           {/* Sidebar */}
-          <Sidebar />
+          <div className="w-full lg:w-28">
+            <Sidebar />
+          </div>
 
           {/* Main Content Area */}
-          <div className="flex-1 flex flex-col gap-4">
+          <div className="flex-1 flex flex-col gap-4 w-full">
             {/* Header */}
             <Header />
 
-            {/* Dashboard Content */}
-            <div className="flex-1 flex gap-4">
-              <div className="flex-1 flex flex-col gap-6">
+            {/* Dashboard Content Area */}
+            {/* Dashboard Content Area */}
+            <div className="flex flex-col lg:flex-row flex-1 gap-4 w-full">
+              {/* Left Content */}
+              <div className="flex-1 flex flex-col gap-6 w-full">
                 <DashboardContent />
               </div>
 
               {/* Right Sidebar */}
-              <div className="w-80 flex flex-col gap-4">
+              <div className="w-full lg:w-80 flex flex-col gap-4">
                 <QuickActions />
                 <Stats />
                 <MonthlySpending />
